@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales Closer Application – Agexa Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --yellow: #ebff00; --yellow-dark: #c4d405;
+    --black: #000; --white: #fff;
+    --gray-dark: #5b5959; --gray-mid: #848383; --gray-light: #a4a3a3;
+  }
+  body { background: var(--black); color: var(--white); font-family: 'Montserrat', sans-serif; font-weight: 300; line-height: 1.6; min-height: 100vh; }
+  header { padding: 52px 64px 48px; border-bottom: 1px solid #111; }
+  .logo { display: flex; align-items: center; gap: 0; margin-bottom: 52px; }
+  .logo-agexa { font-size: 20px; font-weight: 900; letter-spacing: 1px; color: var(--yellow); text-transform: uppercase; }
+  .logo-divider { width: 1px; height: 22px; background: var(--white); margin: 0 10px; opacity: 0.5; }
+  .logo-intelligence { font-size: 20px; font-weight: 100; letter-spacing: 1px; color: var(--white); }
+  .hero { max-width: 760px; }
+  .eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 4px; color: var(--yellow); text-transform: uppercase; margin-bottom: 20px; }
+  h1 { font-size: clamp(34px, 5vw, 56px); font-weight: 900; line-height: 1.0; letter-spacing: -1px; margin-bottom: 24px; text-transform: uppercase; }
+  .hero-sub { font-size: 16px; font-weight: 300; color: var(--gray-mid); max-width: 580px; line-height: 1.8; }
+  .hero-sub strong { color: var(--white); font-weight: 600; }
+  .stats { display: flex; gap: 52px; margin-top: 44px; padding-top: 40px; border-top: 1px solid #111; flex-wrap: wrap; }
+  .stat-num { font-size: 26px; font-weight: 900; color: var(--yellow); letter-spacing: -1px; }
+  .stat-label { font-size: 10px; font-weight: 600; color: var(--gray-dark); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+  .main { padding: 60px 64px; max-width: 920px; }
+  .section { margin-bottom: 56px; }
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: 4px; color: var(--yellow); text-transform: uppercase; margin-bottom: 20px; }
+  .what-we-do { background: #080808; border: 1px solid #111; border-left: 3px solid var(--yellow); padding: 36px 40px; margin-bottom: 56px; }
+  .what-we-do h2 { font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 18px; }
+  .what-we-do p { color: var(--gray-mid); font-size: 14px; font-weight: 300; line-height: 1.9; margin-bottom: 14px; }
+  .what-we-do p:last-child { margin-bottom: 0; }
+  .what-we-do p strong { color: var(--white); font-weight: 600; }
+  .requirements { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 56px; }
+  @media (max-width: 640px) { .requirements { grid-template-columns: 1fr; } header, .main { padding: 40px 28px; } .stats { gap: 32px; } }
+  .req-card { background: #080808; border: 1px solid #111; padding: 28px; }
+  .req-card.yes { border-left: 3px solid var(--yellow); }
+  .req-card.no { border-left: 3px solid var(--gray-dark); }
+  .req-card h4 { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; color: var(--gray-mid); }
+  .req-card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .req-card ul li { font-size: 13px; font-weight: 300; color: #ccc; display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+  .req-card ul li::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+  .req-card.yes ul li::before { background: var(--yellow); }
+  .req-card.no ul li::before { background: var(--gray-dark); }
+  .form-divider { border: none; border-top: 1px solid #111; margin: 44px 0; }
+  .form-section-title { font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 28px; }
+  .form-section-title span { color: var(--yellow); }
+  .form-group { margin-bottom: 28px; }
+  label { display: block; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-mid); margin-bottom: 10px; }
+  label span.req { color: var(--yellow); margin-left: 3px; }
+  input, select, textarea { width: 100%; background: #080808; border: 1px solid #1a1a1a; color: var(--white); font-size: 14px; font-family: 'Montserrat', sans-serif; font-weight: 300; padding: 14px 16px; outline: none; transition: border-color 0.2s; -webkit-appearance: none; appearance: none; border-radius: 0; }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; cursor: pointer; }
+  input:focus, select:focus, textarea:focus { border-color: var(--yellow); }
+  textarea { resize: vertical; min-height: 100px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+  .char-counter { font-size: 10px; color: #333; text-align: right; margin-top: 6px; }
+  .note { font-size: 11px; color: #444; margin-top: 8px; font-weight: 300; font-style: italic; }
+  .submit-btn { background: var(--yellow); color: var(--black); border: none; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; padding: 20px 48px; cursor: pointer; transition: background 0.2s, transform 0.1s; width: 100%; margin-top: 16px; }
+  .submit-btn:hover { background: var(--yellow-dark); }
+  .submit-btn:active { transform: scale(0.99); }
+  .submit-btn:disabled { background: #333; color: #666; cursor: not-allowed; }
+  .disclaimer { font-size: 11px; font-weight: 300; color: #333; margin-top: 16px; text-align: center; line-height: 1.7; }
+  .success-screen { display: none; padding: 80px 64px; max-width: 680px; }
+  .success-icon { width: 52px; height: 52px; background: var(--yellow); display: flex; align-items: center; justify-content: center; margin-bottom: 32px; font-size: 22px; color: var(--black); font-weight: 900; }
+  .success-screen h2 { font-size: 36px; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; margin-bottom: 20px; }
+  .success-screen p { color: var(--gray-mid); font-size: 15px; font-weight: 300; line-height: 1.9; }
+  #statusMsg { font-size: 12px; font-weight: 600; letter-spacing: 1px; margin-bottom: 16px; display: none; }
+  .sending-indicator { display: none; font-size: 11px; color: var(--gray-mid); letter-spacing: 2px; text-transform: uppercase; margin-top: 12px; text-align: center; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="logo-agexa">AGEXA</span>
+    <div class="logo-divider"></div>
+    <span class="logo-intelligence">Intelligence</span>
+  </div>
+  <div class="hero">
+    <div class="eyebrow">Now Accepting Applications</div>
+    <h1>High-Ticket<br>Sales Closer</h1>
+    <p class="hero-sub">
+      We're building the <strong>Avengers of sales</strong> for one of the most credentialed operators in the education space. This is not a training program. This is not a side hustle. <strong>This is a seat at a table that moves fast and pays well.</strong>
+    </p>
+    <div class="stats">
+      <div class="stat-item"><div class="stat-num">$10K–$50K</div><div class="stat-label">Monthly Retainer Range</div></div>
+      <div class="stat-item"><div class="stat-num">$100M+</div><div class="stat-label">Portfolio Built</div></div>
+      <div class="stat-item"><div class="stat-num">Remote</div><div class="stat-label">Location</div></div>
+      <div class="stat-item"><div class="stat-num">Immediate</div><div class="stat-label">Start</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="main" id="mainContent">
+  <div class="what-we-do">
+    <div class="section-label">Who You'd Be Closing For</div>
+    <h2>The Operating System Behind Education Brands.</h2>
+    <p>Nick Fisher has quietly built a $100M+ portfolio of education brands — not as the face, but as the infrastructure. He's the person founders call when the spike dies and the real work begins: offer architecture, funnel engineering, retention systems, and the paid acquisition that scales it all.</p>
+    <p>Agexa Intelligence works with expert educators, course creators, and high-level operators who are ready to stop launching to survive and start building to compound. Our monthly retainers range from <strong>$10K–$50K/month</strong> depending on scope and fit. Price is never the problem. The right fit is.</p>
+    <p>You'd be closing high-ticket founder clients through a DM-driven pipeline and inbound strategy — alongside a tight team, reporting daily, with direct access to leadership. Perform and you grow. Don't deliver, and this isn't the seat for you.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">What We're Looking For</div>
+    <div class="requirements">
+      <div class="req-card yes">
+        <h4>You're Our Person If</h4>
+        <ul>
+          <li>Closed high-ticket ($10K+) offers in the last 90 days</li>
+          <li>$200K+ in closed revenue recently (ideally $1M+/yr)</li>
+          <li>Background in marketing, agency, coaching, or consulting</li>
+          <li>Fully available during business hours — no side gigs</li>
+          <li>Psychology-first approach — you read people, not scripts</li>
+          <li>You invest in human behavior and influence on your own time</li>
+          <li>Organized, CRM-literate, obsessed with follow-through</li>
+          <li>Rejection sharpens you — it doesn't break you</li>
+        </ul>
+      </div>
+      <div class="req-card no">
+        <h4>Don't Apply If</h4>
+        <ul>
+          <li>You rely on pressure tactics or car-salesman methods</li>
+          <li>Your background is Forex, dropshipping, or MLM</li>
+          <li>You need constant hand-holding or direction</li>
+          <li>You make excuses when results are slow</li>
+          <li>This would be a side hustle alongside other work</li>
+          <li>You've never closed anything over $5K</li>
+          <li>You think tactics matter more than psychology</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="form-divider">
+
+  <div id="applicationForm">
+    <div class="section-label">Apply Now</div>
+    <p style="color:#5b5959; font-size:13px; font-weight:300; margin-bottom:40px; line-height:1.9;">
+      This is not a lengthy process. Answer honestly. We can train skills — we can't train grit. Applications reviewed within 48 hours. Female closers strongly encouraged to apply.
+    </p>
+
+    <div class="form-section-title">01 / <span>Contact Info</span></div>
+    <div class="form-row">
+      <div class="form-group"><label>First Name <span class="req">*</span></label><input type="text" id="firstName" placeholder="First name"></div>
+      <div class="form-group"><label>Last Name <span class="req">*</span></label><input type="text" id="lastName" placeholder="Last name"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Email <span class="req">*</span></label><input type="email" id="email" placeholder="your@email.com"></div>
+      <div class="form-group"><label>Phone Number <span class="req">*</span></label><input type="tel" id="phone" placeholder="+1 (555) 000-0000"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>City & State / Country <span class="req">*</span></label><input type="text" id="location" placeholder="e.g. Austin, TX"></div>
+      <div class="form-group"><label>LinkedIn or Instagram URL</label><input type="url" id="socialUrl" placeholder="https://..."></div>
+    </div>
+
+    <hr class="form-divider">
+    <div class="form-section-title">02 / <span>Experience & Numbers</span></div>
+    <div class="form-group">
+      <label>How much have you closed in the last 90 days? <span class="req">*</span></label>
+      <select id="closedRevenue"><option value="" disabled selected>Select range</option><option>Under $50K</option><option>$50K – $150K</option><option>$150K – $300K</option><option>$300K – $600K</option><option>$600K – $1M</option><option>$1M+</option></select>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Average deal size? <span class="req">*</span></label>
+        <select id="dealSize"><option value="" disabled selected>Select range</option><option>Under $3K</option><option>$3K – $7K</option><option>$7K – $15K</option><option>$15K – $30K</option><option>$30K – $50K</option><option>$50K+</option></select>
+      </div>
+      <div class="form-group">
+        <label>What industry? <span class="req">*</span></label>
+        <select id="industry"><option value="" disabled selected>Select closest match</option><option>Marketing / Agency</option><option>Coaching / Consulting</option><option>Info Products / Education</option><option>SaaS / Tech</option><option>Real Estate</option><option>Finance / Investing</option><option>Other Service-Based</option><option>Forex / Crypto / Dropshipping</option><option>Other</option></select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Are you fully available during business hours? <span class="req">*</span></label>
+      <select id="availability"><option value="" disabled selected>Select one</option><option>Yes — this would be my primary focus</option><option>Mostly — I have some light commitments</option><option>No — I have another full-time role</option></select>
+    </div>
+
+    <hr class="form-divider">
+    <div class="form-section-title">03 / <span>Philosophy & Approach</span></div>
+    <div class="form-group">
+      <label>Describe your sales approach in 2–3 sentences. <span class="req">*</span></label>
+      <textarea id="salesApproach" placeholder="How do you think about sales? What's your philosophy?" maxlength="600" oninput="updateCounter(this,'approachCount',600)"></textarea>
+      <div class="char-counter"><span id="approachCount">0</span> / 600</div>
+    </div>
+    <div class="form-group">
+      <label>Someone says "I need to think about it." What do you do? <span class="req">*</span></label>
+      <textarea id="objectionHandle" placeholder="Walk us through your actual response..." maxlength="600" oninput="updateCounter(this,'objectionCount',600)"></textarea>
+      <div class="char-counter"><span id="objectionCount">0</span> / 600</div>
+    </div>
+    <div class="form-group">
+      <label>What books, trainers, or courses have you invested in recently? <span class="req">*</span></label>
+      <textarea id="books" placeholder="Be specific. This tells us a lot about how you think." maxlength="400" oninput="updateCounter(this,'booksCount',400)"></textarea>
+      <div class="char-counter"><span id="booksCount">0</span> / 400</div>
+      <div class="note">We value psychology, warfare, and human behavior. We're skeptical of pure tactics-based programs.</div>
+    </div>
+    <div class="form-group">
+      <label>Tell us about a time you were behind on target and what you did. <span class="req">*</span></label>
+      <textarea id="gritStory" placeholder="Be specific. Numbers, timeline, what happened." maxlength="600" oninput="updateCounter(this,'gritCount',600)"></textarea>
+      <div class="char-counter"><span id="gritCount">0</span> / 600</div>
+    </div>
+
+    <hr class="form-divider">
+    <div class="form-section-title">04 / <span>Final Questions</span></div>
+    <div class="form-group">
+      <label>Why do you want this specific role? <span class="req">*</span></label>
+      <textarea id="whyUs" placeholder="Not generic. Why this company, this space, right now." maxlength="500" oninput="updateCounter(this,'whyCount',500)"></textarea>
+      <div class="char-counter"><span id="whyCount">0</span> / 500</div>
+    </div>
+    <div class="form-group">
+      <label>How soon can you start? <span class="req">*</span></label>
+      <select id="startDate"><option value="" disabled selected>Select one</option><option>Immediately</option><option>Within 1 week</option><option>1–2 weeks</option><option>2–4 weeks</option><option>More than a month out</option></select>
+    </div>
+    <div class="form-group">
+      <label>Anything else we should know?</label>
+      <textarea id="additionalInfo" placeholder="Optional — use this if there's something important not covered above." maxlength="400" oninput="updateCounter(this,'addCount',400)"></textarea>
+      <div class="char-counter"><span id="addCount">0</span> / 400</div>
+    </div>
+
+    <div id="statusMsg"></div>
+    <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">Submit Application →</button>
+    <div class="sending-indicator" id="sendingIndicator">⏳ Submitting your application...</div>
+    <p class="disclaimer">Applications reviewed within 48 hours. Only qualified candidates will be contacted. Female closers strongly encouraged to apply.</p>
+  </div>
+</div>
+
+<div class="success-screen" id="successScreen">
+  <div class="success-icon">✓</div>
+  <div class="eyebrow">Application Received</div>
+  <h2>You're in the queue.</h2>
+  <p>We review every application personally. If you're the right fit, you'll hear from us within 48 hours. No fluff. No ghost. If we don't reach out, the timing or fit wasn't right — but we appreciate you putting yourself forward.</p>
+  <p style="margin-top:20px;">In the meantime — if you haven't followed Nick Fisher's work yet, that's your homework.</p>
+</div>
+
+<script>
+const SLACK_CHANNEL_ID = "C0AHH0F7YJE";
+
+function updateCounter(el, id, max) {
+  document.getElementById(id).textContent = el.value.length;
+}
+
+function val(id) { return document.getElementById(id).value.trim(); }
+
+async function handleSubmit() {
+  const fields = [
+    { id: 'firstName', label: 'First name' }, { id: 'lastName', label: 'Last name' },
+    { id: 'email', label: 'Email' }, { id: 'phone', label: 'Phone' },
+    { id: 'location', label: 'Location' }, { id: 'closedRevenue', label: 'Revenue closed (90 days)' },
+    { id: 'dealSize', label: 'Average deal size' }, { id: 'industry', label: 'Industry' },
+    { id: 'availability', label: 'Availability' }, { id: 'salesApproach', label: 'Sales approach' },
+    { id: 'objectionHandle', label: 'Objection handling' }, { id: 'books', label: 'Books / training' },
+    { id: 'gritStory', label: 'Grit story' }, { id: 'whyUs', label: 'Why this role' },
+    { id: 'startDate', label: 'Start date' },
+  ];
+
+  const statusEl = document.getElementById('statusMsg');
+  const missing = fields.filter(f => !val(f.id)).map(f => f.label);
+
+  if (missing.length) {
+    statusEl.style.color = '#ebff00';
+    statusEl.textContent = 'Please complete: ' + missing.slice(0,3).join(', ') + (missing.length > 3 ? ` + ${missing.length - 3} more.` : '.');
+    statusEl.style.display = 'block';
+    statusEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  statusEl.style.display = 'none';
+  const btn = document.getElementById('submitBtn');
+  const indicator = document.getElementById('sendingIndicator');
+  btn.disabled = true;
+  indicator.style.display = 'block';
+
+  const social = val('socialUrl') || 'Not provided';
+  const additional = val('additionalInfo') || 'None';
+
+  const slackMsg = `🟡 *New Sales Closer Application — AGEXA Intelligence*
+
+*👤 Applicant:* ${val('firstName')} ${val('lastName')}
+*📧 Email:* ${val('email')}
+*📱 Phone:* ${val('phone')}
+*📍 Location:* ${val('location')}
+*🔗 Social:* ${social}
+
+*💰 Revenue Closed (90 days):* ${val('closedRevenue')}
+*📊 Avg Deal Size:* ${val('dealSize')}
+*🏭 Industry:* ${val('industry')}
+*⏰ Availability:* ${val('availability')}
+
+*🧠 Sales Philosophy:*
+${val('salesApproach')}
+
+*🛡️ Objection Handling ("I need to think about it"):*
+${val('objectionHandle')}
+
+*📚 Books / Training:*
+${val('books')}
+
+*💪 Grit Story (behind on target):*
+${val('gritStory')}
+
+*🎯 Why This Role:*
+${val('whyUs')}
+
+*🚀 Start Date:* ${val('startDate')}
+
+*📝 Additional Notes:*
+${additional}`;
+
+  try {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        mcp_servers: [{ type: "url", url: "https://mcp.slack.com/mcp", name: "slack" }],
+        tools: [{ type: "mcp", name: "slack", server_name: "slack" }],
+        messages: [{
+          role: "user",
+          content: `Send the following message exactly as-is to Slack channel ID ${SLACK_CHANNEL_ID}. Do not modify or summarize it. Just send it.\n\n${slackMsg}`
+        }]
+      })
+    });
+
+    const data = await res.json();
+    const success = data.content && data.content.some(b =>
+      (b.type === "text" && b.text && b.text.toLowerCase().includes("sent")) ||
+      b.type === "tool_result" || b.type === "tool_use"
+    );
+
+    if (res.ok) {
+      document.getElementById('mainContent').style.display = 'none';
+      document.getElementById('successScreen').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      throw new Error(data.error?.message || 'Submission failed');
+    }
+  } catch (err) {
+    btn.disabled = false;
+    indicator.style.display = 'none';
+    statusEl.style.color = '#ff4444';
+    statusEl.textContent = 'Submission failed. Please try again or contact us directly.';
+    statusEl.style.display = 'block';
+    console.error('Slack error:', err);
+  }
+}
+</script>
+</body>
+</html>
