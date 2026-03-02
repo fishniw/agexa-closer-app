@@ -235,7 +235,7 @@
 </div>
 
 <script>
-const SLACK_CHANNEL_ID = "C0AHH0F7YJE";
+const SLACK_CHANNEL_ID = "C0AHH0F7YJE"; // #sales-rep-apps
 
 function updateCounter(el, id, max) {
   document.getElementById(id).textContent = el.value.length;
@@ -309,28 +309,15 @@ ${val('whyUs')}
 ${additional}`;
 
   try {
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
+    const res = await fetch("/.netlify/functions/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 1000,
-        mcp_servers: [{ type: "url", url: "https://mcp.slack.com/mcp", name: "slack" }],
-        tools: [{ type: "mcp", name: "slack", server_name: "slack" }],
-        messages: [{
-          role: "user",
-          content: `Send the following message exactly as-is to Slack channel ID ${SLACK_CHANNEL_ID}. Do not modify or summarize it. Just send it.\n\n${slackMsg}`
-        }]
-      })
+      body: JSON.stringify({ message: slackMsg, channelId: SLACK_CHANNEL_ID })
     });
 
     const data = await res.json();
-    const success = data.content && data.content.some(b =>
-      (b.type === "text" && b.text && b.text.toLowerCase().includes("sent")) ||
-      b.type === "tool_result" || b.type === "tool_use"
-    );
 
-    if (res.ok) {
+    if (res.ok && data.ok) {
       document.getElementById('mainContent').style.display = 'none';
       document.getElementById('successScreen').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
